@@ -9,20 +9,17 @@ const Footer = () => {
 
   const footerLinks = {
     services: [
-      { name: 'Développement Web 3D', href: '#services' },
-      { name: 'Solutions IA', href: '#services' },
-      { name: 'Apps Mobiles', href: '#services' },
-      { name: 'Marketing Digital', href: '#services' },
+      { name: 'Sites web professionnels', href: '#services' },
+      { name: 'Applications web', href: '#services' },
+      { name: 'Applications mobiles', href: '#services' },
+      { name: 'Solutions sur mesure', href: '#services' },
+      { name: 'Formation', href: '#services' },
     ],
     company: [
       { name: 'À propos', href: '#about' },
-      { name: 'Projets', href: '#projects' },
+      { name: 'Réalisations', href: '#projects' },
       { name: 'Contact', href: '#contact' },
     ],
-    legal: [
-      { name: 'Mentions légales', href: '#' },
-      { name: 'Politique de confidentialité', href: '#' },
-    ]
   }
 
   const scrollToSection = (href: string) => {
@@ -38,6 +35,15 @@ const Footer = () => {
     <footer className="relative py-16 border-t border-white/10">
       <div className="section-padding">
         <div className="max-w-7xl mx-auto">
+          {/* Positioning Statement */}
+          <div className="text-center mb-12 p-6 glass rounded-2xl">
+            <p className="text-white/90 text-lg md:text-xl font-medium">
+              Nous aidons les entreprises et organisations au Burkina Faso à{' '}
+              <span className="gradient-text font-bold">digitaliser leurs activités</span>{' '}
+              grâce à des solutions web et mobiles adaptées.
+            </p>
+          </div>
+
           {/* Main Footer Content */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             {/* Brand */}
@@ -50,9 +56,12 @@ const Footer = () => {
                   scrollToTop()
                 }}
               >
-                <div className="relative w-10 h-10 flex items-center justify-center">
-                  <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan to-neon-blue rounded-lg opacity-80" />
-                  <span className="relative text-black font-bold text-xl font-display">W</span>
+                <div className="relative w-10 h-10 flex items-center justify-center overflow-hidden rounded-lg bg-white/10 border border-neon-cyan/30 p-1">
+                  <img 
+                    src="/images/logowic.png" 
+                    alt="WebInfoCom" 
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
                   <span className="text-white font-semibold text-lg font-display">Web</span>
@@ -61,8 +70,8 @@ const Footer = () => {
                 </div>
               </a>
               <p className="text-white/60 text-sm mb-6 leading-relaxed">
-                Agence digitale innovante spécialisée dans la transformation numérique, 
-                le développement web 3D et les solutions d'intelligence artificielle.
+                Solutions digitales adaptées aux réalités du Burkina Faso. 
+                Sites web, applications et outils de gestion.
               </p>
               <div className="flex items-center gap-2 text-white/40 text-sm">
                 <span>Fait avec</span>
@@ -105,21 +114,14 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Legal */}
+            {/* Contact */}
             <div>
-              <h4 className="text-white font-semibold mb-4 font-display">Légal</h4>
-              <ul className="space-y-3">
-                {footerLinks.legal.map((link, index) => (
-                  <li key={index}>
-                    <a
-                      href={link.href}
-                      className="text-white/60 hover:text-neon-cyan text-sm transition-colors duration-300"
-                    >
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <h4 className="text-white font-semibold mb-4 font-display">Contact</h4>
+              <div className="space-y-3 text-white/60 text-sm">
+                <p>📞 +226 71 46 08 02</p>
+                <p>📧 contact@webinfocom.bf</p>
+                <p>📍 Ouagadougou, Burkina Faso</p>
+              </div>
             </div>
           </div>
 

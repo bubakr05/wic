@@ -1,12 +1,11 @@
 import { useRef, useEffect, useState } from 'react'
 import { 
   Globe, 
-  Brain, 
-  Smartphone, 
-  TrendingUp, 
-  GraduationCap, 
-  Lightbulb,
-  ArrowUpRight
+  Smartphone,
+  Monitor,
+  Settings,
+  GraduationCap,
+  CheckCircle2
 } from 'lucide-react'
 
 interface Service {
@@ -14,6 +13,7 @@ interface Service {
   title: string
   description: string
   features: string[]
+  objective: string
   color: string
   gradient: string
 }
@@ -21,51 +21,73 @@ interface Service {
 const services: Service[] = [
   {
     icon: Globe,
-    title: 'Développement Web 3D',
-    description: 'Sites vitrines immersifs, expériences e-commerce interactives et applications web avec animations 3D fluides.',
-    features: ['Three.js / WebGL', 'React Three Fiber', 'Animations immersives', 'Performance optimisée'],
+    title: 'Création de sites web professionnels',
+    description: 'Sites vitrines pour entreprises, hôtels, écoles et agences immobilières avec design moderne et responsive.',
+    features: [
+      'Sites vitrines pour entreprises',
+      'Sites pour hôtels, écoles, agences',
+      'Design moderne et responsive',
+      'Optimisation pour Google'
+    ],
+    objective: 'Améliorer votre visibilité et attirer plus de clients',
     color: 'neon-cyan',
     gradient: 'from-neon-cyan to-neon-blue'
   },
   {
-    icon: Brain,
-    title: 'Solutions IA',
-    description: 'Intégration d\'intelligence artificielle, chatbots intelligents, automatisation et analyse prédictive.',
-    features: ['Chatbots IA', 'Machine Learning', 'Automatisation', 'Analyse de données'],
+    icon: Monitor,
+    title: 'Développement d\'applications web',
+    description: 'Applications de gestion pour écoles, entreprises et PME avec automatisation des tâches.',
+    features: [
+      'Applications de gestion (écoles, PME)',
+      'Automatisation (facturation, suivi)',
+      'Accès sécurisé avec comptes utilisateurs',
+      'Tableaux de bord personnalisés'
+    ],
+    objective: 'Simplifier votre gestion quotidienne',
+    color: 'neon-blue',
+    gradient: 'from-neon-blue to-neon-purple'
+  },
+  {
+    icon: Smartphone,
+    title: 'Développement d\'applications mobiles',
+    description: 'Applications Android adaptées au contexte local avec interface simple pour vos équipes.',
+    features: [
+      'Applications Android adaptées au local',
+      'Solutions utilisables avec connexion limitée',
+      'Interface simple pour vos équipes',
+      'Déploiement rapide'
+    ],
+    objective: 'Rendre vos services accessibles partout',
     color: 'neon-purple',
     gradient: 'from-neon-purple to-neon-pink'
   },
   {
-    icon: Smartphone,
-    title: 'Apps Mobiles',
-    description: 'Applications natives et cross-platform iOS/Android avec expériences utilisateur fluides et modernes.',
-    features: ['React Native', 'Flutter', 'iOS & Android', 'UI/UX moderne'],
-    color: 'neon-blue',
-    gradient: 'from-neon-blue to-neon-cyan'
-  },
-  {
-    icon: TrendingUp,
-    title: 'Marketing Digital',
-    description: 'Stratégies SEO/SEA, réseaux sociaux et campagnes publicitaires data-driven pour maximiser votre ROI.',
-    features: ['SEO/SEA', 'Réseaux sociaux', 'Analytics', 'Growth hacking'],
+    icon: Settings,
+    title: 'Solutions digitales sur mesure',
+    description: 'Analyse de vos besoins et conception de solutions personnalisées adaptées à votre activité.',
+    features: [
+      'Analyse de vos besoins',
+      'Conception de solutions personnalisées',
+      'Intégration de systèmes existants',
+      'Support et maintenance'
+    ],
+    objective: 'Créer un outil parfaitement adapté à votre activité',
     color: 'neon-pink',
-    gradient: 'from-neon-pink to-neon-purple'
+    gradient: 'from-neon-pink to-neon-cyan'
   },
   {
     icon: GraduationCap,
-    title: 'Formation',
-    description: 'Programmes de formation certifiants aux technologies web, design UX/UI et outils digitaux modernes.',
-    features: ['Workshops', 'Certifications', 'Coaching', 'E-learning'],
+    title: 'Formation & accompagnement',
+    description: 'Formation à l\'utilisation des outils et assistance après livraison pour votre autonomie.',
+    features: [
+      'Formation à l\'utilisation des outils',
+      'Assistance après livraison',
+      'Support technique réactif',
+      'Documentation complète'
+    ],
+    objective: 'Vous rendre autonome',
     color: 'neon-cyan',
-    gradient: 'from-neon-cyan to-neon-purple'
-  },
-  {
-    icon: Lightbulb,
-    title: 'Conseil Stratégique',
-    description: 'Audit digital complet, stratégie de transformation et accompagnement personnalisé vers l\'excellence.',
-    features: ['Audit digital', 'Stratégie', 'Accompagnement', 'Transformation'],
-    color: 'neon-blue',
-    gradient: 'from-neon-blue to-neon-pink'
+    gradient: 'from-neon-cyan to-neon-blue'
   }
 ]
 
@@ -103,7 +125,6 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
           transition: 'transform 0.3s ease-out'
         }}
       >
-        {/* Glow Effect */}
         <div 
           className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
           style={{
@@ -111,7 +132,6 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
           }}
         />
 
-        {/* Border Glow */}
         <div 
           className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{
@@ -119,39 +139,33 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
           }}
         />
 
-        {/* Content */}
         <div className="relative z-10">
-          {/* Icon */}
           <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
             <Icon className="w-7 h-7 text-white" />
           </div>
 
-          {/* Title */}
           <h3 className="text-xl font-bold text-white mb-3 font-display group-hover:text-neon-cyan transition-colors duration-300">
             {service.title}
           </h3>
 
-          {/* Description */}
           <p className="text-white/60 text-sm mb-6 leading-relaxed">
             {service.description}
           </p>
 
-          {/* Features */}
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="space-y-2 mb-6">
             {service.features.map((feature, i) => (
-              <span 
-                key={i}
-                className="px-3 py-1 text-xs rounded-full bg-white/5 text-white/70 border border-white/10"
-              >
-                {feature}
-              </span>
+              <div key={i} className="flex items-start gap-2 text-white/70 text-sm">
+                <CheckCircle2 className="w-4 h-4 text-neon-cyan flex-shrink-0 mt-0.5" />
+                <span>{feature}</span>
+              </div>
             ))}
           </div>
 
-          {/* CTA */}
-          <div className="flex items-center gap-2 text-neon-cyan text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-            <span>En savoir plus</span>
-            <ArrowUpRight className="w-4 h-4" />
+          <div className="p-3 glass rounded-lg bg-neon-cyan/5 border border-neon-cyan/20">
+            <p className="text-neon-cyan text-sm font-medium flex items-center gap-2">
+              <span className="text-lg">🎯</span>
+              {service.objective}
+            </p>
           </div>
         </div>
       </div>
@@ -188,24 +202,43 @@ const Services = () => {
     >
       <div className="section-padding">
         <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
           <div className="text-center mb-16 reveal">
             <span className="inline-block px-4 py-2 rounded-full glass text-neon-cyan text-sm font-medium mb-4">
-              Nos Expertises
+              Nos Services
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 font-display">
-              Solutions digitales <span className="gradient-text">sur mesure</span>
+              Des solutions pour <span className="gradient-text">tous vos besoins</span>
             </h2>
             <p className="text-white/60 text-lg max-w-2xl mx-auto">
-              Combinaison de design innovant et technologie de pointe pour propulser votre entreprise.
+              Du site web à l'application mobile en passant par les solutions de gestion, nous accompagnons votre transformation digitale.
             </p>
           </div>
 
-          {/* Services Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
               <ServiceCard key={service.title} service={service} index={index} />
             ))}
+          </div>
+
+          {/* GESCO Mention */}
+          <div className="reveal mt-12 glass-strong rounded-2xl p-8 text-center" style={{ transitionDelay: '600ms' }}>
+            <h3 className="text-xl font-bold text-white mb-4 font-display">
+              Nos solutions déjà développées
+            </h3>
+            <p className="text-white/70 mb-4">
+              Nous développons également des solutions prêtes à l'emploi, comme :
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              <span className="px-4 py-2 rounded-full bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/30">
+                Logiciels de gestion scolaire
+              </span>
+              <span className="px-4 py-2 rounded-full bg-neon-blue/10 text-neon-blue border border-neon-blue/30">
+                Outils de gestion d'entreprise
+              </span>
+            </div>
+            <p className="text-white/60 text-sm mt-4">
+              Ces solutions peuvent être adaptées selon vos besoins
+            </p>
           </div>
         </div>
       </div>

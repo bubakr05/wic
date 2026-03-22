@@ -40,18 +40,21 @@ const Navigation = () => {
       >
         <div className="section-padding">
           <div className="flex items-center justify-between">
-            {/* Logo */}
+              {/* Logo */}
             <a 
               href="#" 
-              className="flex items-center gap-2 group"
+              className="flex items-center gap-3 group"
               onClick={(e) => {
                 e.preventDefault()
                 window.scrollTo({ top: 0, behavior: 'smooth' })
               }}
             >
-              <div className="relative w-10 h-10 flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan to-neon-blue rounded-lg opacity-80 group-hover:opacity-100 transition-opacity" />
-                <span className="relative text-black font-bold text-xl font-display">W</span>
+              <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-gradient-to-br from-white to-gray-100 border-2 border-neon-cyan/50 group-hover:border-neon-cyan transition-all duration-300 shadow-lg shadow-neon-cyan/30 group-hover:shadow-neon-cyan/50 flex items-center justify-center p-1">
+                <img 
+                  src="/images/logowic.png" 
+                  alt="WebInfoCom Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="hidden sm:block">
                 <span className="text-white font-semibold text-lg font-display">Web</span>

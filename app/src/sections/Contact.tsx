@@ -1,12 +1,18 @@
 import { useRef, useEffect, useState } from 'react'
-import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Instagram, Github, CheckCircle2 } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, MessageCircle, CheckCircle2 } from 'lucide-react'
 
 const contactInfo = [
   {
+    icon: MessageCircle,
+    label: 'WhatsApp',
+    value: '+226 71 46 08 02',
+    href: 'https://wa.me/22671460802'
+  },
+  {
     icon: Mail,
     label: 'Email',
-    value: 'contact@webinfocom.ci',
-    href: 'mailto:contact@webinfocom.ci'
+    value: 'contact@webinfocom.bf',
+    href: 'mailto:contact@webinfocom.bf'
   },
   {
     icon: Phone,
@@ -22,18 +28,12 @@ const contactInfo = [
   }
 ]
 
-const socialLinks = [
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Github, href: '#', label: 'GitHub' }
-]
-
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     subject: '',
     message: ''
   })
@@ -77,14 +77,12 @@ const Contact = () => {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1500))
     
     setIsSubmitting(false)
     setIsSubmitted(true)
-    setFormData({ name: '', email: '', subject: '', message: '' })
+    setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
     
-    // Reset success message after 5 seconds
     setTimeout(() => setIsSubmitted(false), 5000)
   }
 
@@ -101,7 +99,6 @@ const Contact = () => {
       ref={sectionRef}
       className="relative py-24 md:py-32 overflow-hidden"
     >
-      {/* Background Glow */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -111,25 +108,23 @@ const Contact = () => {
 
       <div className="section-padding relative z-10">
         <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
           <div className="text-center mb-16 reveal">
             <span className="inline-block px-4 py-2 rounded-full glass text-neon-cyan text-sm font-medium mb-4">
-              Contactez-nous
+              Parlons de votre projet
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 font-display">
-              Parlons de votre <span className="gradient-text">projet</span>
+              Vous avez une idée d'application ou besoin d'un <span className="gradient-text">site web</span> ?
             </h2>
             <p className="text-white/60 text-lg max-w-2xl mx-auto">
-              Prêt à transformer votre présence digitale ? Contactez-nous et discutons de vos objectifs.
+              Contactez-nous dès maintenant. Réponse rapide garantie.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-5 gap-12">
-            {/* Contact Info */}
             <div className="lg:col-span-2 space-y-8">
               <div className="reveal" style={{ transitionDelay: '100ms' }}>
                 <h3 className="text-xl font-bold text-white mb-6 font-display">
-                  Informations de contact
+                  Contactez-nous
                 </h3>
                 <div className="space-y-4">
                   {contactInfo.map((item, index) => {
@@ -138,6 +133,8 @@ const Contact = () => {
                       <a
                         key={index}
                         href={item.href}
+                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                        rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                         className="flex items-center gap-4 p-4 glass rounded-xl hover:bg-white/10 transition-all duration-300 group"
                       >
                         <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-neon-cyan/20 to-neon-blue/20 flex items-center justify-center group-hover:from-neon-cyan group-hover:to-neon-blue transition-all duration-300">
@@ -153,47 +150,28 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Social Links */}
-              <div className="reveal" style={{ transitionDelay: '200ms' }}>
-                <h3 className="text-xl font-bold text-white mb-4 font-display">
-                  Suivez-nous
-                </h3>
-                <div className="flex gap-3">
-                  {socialLinks.map((social, index) => {
-                    const Icon = social.icon
-                    return (
-                      <a
-                        key={index}
-                        href={social.href}
-                        aria-label={social.label}
-                        className="w-12 h-12 rounded-xl glass flex items-center justify-center text-white/60 hover:text-neon-cyan hover:bg-neon-cyan/10 hover:border-neon-cyan/30 transition-all duration-300"
-                      >
-                        <Icon className="w-5 h-5" />
-                      </a>
-                    )
-                  })}
+              <div className="reveal glass rounded-2xl p-6 bg-green-500/10 border border-green-500/30" style={{ transitionDelay: '200ms' }}>
+                <div className="flex items-center gap-3 mb-3">
+                  <MessageCircle className="w-6 h-6 text-green-400" />
+                  <h4 className="text-lg font-bold text-white">
+                    Réponse rapide garantie
+                  </h4>
                 </div>
-              </div>
-
-              {/* Quick CTA */}
-              <div className="reveal glass rounded-2xl p-6" style={{ transitionDelay: '300ms' }}>
-                <h4 className="text-lg font-bold text-white mb-2">
-                  Besoin d'une réponse rapide ?
-                </h4>
-                <p className="text-white/60 text-sm mb-4">
-                  Appelez-nous directement pour discuter de votre projet en temps réel.
+                <p className="text-white/70 text-sm mb-4">
+                  Contactez-nous directement sur WhatsApp pour une réponse immédiate.
                 </p>
                 <a 
-                  href="tel:+22671460802"
-                  className="inline-flex items-center gap-2 text-neon-cyan font-medium hover:underline"
+                  href="https://wa.me/22671460802"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium px-4 py-2 rounded-lg transition-colors"
                 >
-                  <Phone className="w-4 h-4" />
-                  +226 71 46 08 02
+                  <MessageCircle className="w-5 h-5" />
+                  Écrire sur WhatsApp
                 </a>
               </div>
             </div>
 
-            {/* Contact Form */}
             <div className="lg:col-span-3 reveal" style={{ transitionDelay: '200ms' }}>
               <div className="glass-strong rounded-2xl p-6 md:p-8">
                 {isSubmitted ? (
@@ -211,7 +189,7 @@ const Contact = () => {
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="name" className="block text-white/80 text-sm font-medium mb-2">
-                          Nom complet
+                          Nom complet *
                         </label>
                         <input
                           type="text"
@@ -225,8 +203,25 @@ const Contact = () => {
                         />
                       </div>
                       <div>
+                        <label htmlFor="phone" className="block text-white/80 text-sm font-medium mb-2">
+                          WhatsApp
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all duration-300"
+                          placeholder="+226 XX XX XX XX"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
                         <label htmlFor="email" className="block text-white/80 text-sm font-medium mb-2">
-                          Email
+                          Email *
                         </label>
                         <input
                           type="email"
@@ -239,32 +234,32 @@ const Contact = () => {
                           placeholder="votre@email.com"
                         />
                       </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="subject" className="block text-white/80 text-sm font-medium mb-2">
-                        Sujet
-                      </label>
-                      <select
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all duration-300 appearance-none cursor-pointer"
-                      >
-                        <option value="" className="bg-background">Sélectionnez un sujet</option>
-                        <option value="web-3d" className="bg-background">Développement Web 3D</option>
-                        <option value="ia" className="bg-background">Solutions IA</option>
-                        <option value="mobile" className="bg-background">Apps Mobiles</option>
-                        <option value="marketing" className="bg-background">Marketing Digital</option>
-                        <option value="autre" className="bg-background">Autre</option>
-                      </select>
+                      <div>
+                        <label htmlFor="subject" className="block text-white/80 text-sm font-medium mb-2">
+                          Type de projet *
+                        </label>
+                        <select
+                          id="subject"
+                          name="subject"
+                          value={formData.subject}
+                          onChange={handleChange}
+                          required
+                          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all duration-300 appearance-none cursor-pointer"
+                        >
+                          <option value="" className="bg-background">Sélectionnez un type</option>
+                          <option value="site-web" className="bg-background">Site web professionnel</option>
+                          <option value="app-web" className="bg-background">Application web</option>
+                          <option value="app-mobile" className="bg-background">Application mobile</option>
+                          <option value="gestion-scolaire" className="bg-background">Logiciel de gestion scolaire (GESCO)</option>
+                          <option value="gestion-entreprise" className="bg-background">Outil de gestion d'entreprise</option>
+                          <option value="autre" className="bg-background">Autre projet</option>
+                        </select>
+                      </div>
                     </div>
 
                     <div>
                       <label htmlFor="message" className="block text-white/80 text-sm font-medium mb-2">
-                        Message
+                        Décrivez votre projet *
                       </label>
                       <textarea
                         id="message"
@@ -274,7 +269,7 @@ const Contact = () => {
                         required
                         rows={5}
                         className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all duration-300 resize-none"
-                        placeholder="Décrivez votre projet..."
+                        placeholder="Décrivez votre besoin, vos objectifs et votre budget approximatif..."
                       />
                     </div>
 
@@ -290,7 +285,7 @@ const Contact = () => {
                         </>
                       ) : (
                         <>
-                          Envoyer le message
+                          Demander un devis gratuit
                           <Send className="w-5 h-5" />
                         </>
                       )}
